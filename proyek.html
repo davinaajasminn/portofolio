@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyek | Davina Jasmin Azzahra</title>
+<meta name="description" content="Portofolio Davina Jasmin Azzahra, lulusan Sistem Informasi dengan pengalaman perancangan sistem, pengembangan web, dan pengujian perangkat lunak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+/* Kalau gambar .png tidak ada, coba ekstensi lain; kalau tetap tidak ada, sembunyikan kotaknya */
+var EXT=['png','jpg','jpeg','webp','PNG','JPG','JPEG','WEBP'];
+function imgFallback(img){
+  var cur=img.getAttribute('src'),base=cur.replace(/\.[A-Za-z]+$/,''),n=+(img.dataset.n||0);
+  if(n>=EXT.length){var f=img.closest('figure');if(f)f.remove();return;}
+  img.dataset.n=n+1;
+  var next=base+'.'+EXT[n];
+  if(next===cur){imgFallback(img);return;}
+  img.src=next;
+  var a=img.closest('a');if(a)a.href=next;
+}
+
+/* Gambar di dalam tabel: coba ekstensi lain; kalau tetap tidak ada, kosongkan selnya / sembunyikan barisnya */
+function tcFallback(img){
+  var cur=img.getAttribute('src'),base=cur.replace(/\.[A-Za-z]+$/,''),n=+(img.dataset.n||0);
+  if(n>=EXT.length){
+    var tr=img.closest('tr.hasil');
+    if(tr){tr.remove();return;}
+    var td=img.closest('td');if(td)td.innerHTML='&ndash;';return;
+  }
+  img.dataset.n=n+1;
+  var next=base+'.'+EXT[n];
+  if(next===cur){tcFallback(img);return;}
+  img.src=next;
+  var a=img.closest('a');if(a)a.href=next;
+}
+</script>
+<style>
+/* Tabel pengujian (ditaruh di sini supaya tidak tergantung versi style.css) */
+.tc-wrap{overflow-x:auto;margin-top:1.1rem}
+.tc{width:100%;border-collapse:collapse;font-size:.95rem;background:#fff;color:#0B0B0B}
+.tc th,.tc td{border:2px solid #0B0B0B;padding:.55rem .8rem;text-align:left;vertical-align:top}
+.tc th{background:#0B0B0B;color:#fff;font:400 1rem "Anton",Impact,sans-serif;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.tc .c{text-align:center}
+.tc-sum tfoot td{font-weight:700;background:#e8e8e8}
+.tc-main{min-width:560px}
+.tc-main .id{font-weight:700;white-space:nowrap;width:1%}
+.tc-main .ok{font-weight:600;white-space:nowrap;width:1%}
+.tc-main .tog{width:2.6rem;font:600 1.3rem/1 "Barlow",sans-serif}
+.tc-main tr.mod td{background:#d9d9d9;font:400 1.15rem "Anton",Impact,sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.tc-main tr.mod small{font:500 .85rem "Barlow",sans-serif;text-transform:none;letter-spacing:0;margin-left:.5rem;color:#333}
+.tc-main tr.tc-row{cursor:pointer}
+.tc-main tr.tc-row:hover td{background:#f0f0f0}
+.tc-main tr.tc-row[aria-expanded="true"] td{background:#e8e8e8}
+.tc-main tr.tc-detail>td{padding:.8rem;background:#f7f7f7}
+.tc-in{min-width:640px}
+.tc-in th{font-size:.9rem}
+.tc-in .bk{width:240px;text-align:center}
+.tc .thumb{display:block;width:100%;max-width:220px;height:auto;margin:0 auto;border:2px solid #0B0B0B}
+.tc .thumb.wide{max-width:560px}
+.tc-main tr.hasil td{text-align:center;background:#fff}
+.tc-main tr.hasil small{display:block;margin-top:.4rem;color:#333}
+.tc-sum tr.mrow{cursor:pointer}
+.tc-sum tr.mrow td{font-weight:600}
+.tc-sum tr.mrow:hover td{background:#f0f0f0}
+.tc-sum tr.mrow[aria-expanded="true"] td{background:#e8e8e8}
+.tc-sum .tog{width:2.6rem;font:600 1.3rem/1 "Barlow",sans-serif}
+.tc-sum tr.mdetail>td{padding:.8rem;background:#f7f7f7}
+.tc-sum tr.mdetail .tc-wrap{margin-top:0}
+.tc-hint{margin:1rem 0 0;font-size:.95rem}
+/* kotak proyek: hitam dengan teks putih */
+body.light details{background:#111;color:#fff;border-color:#111}
+body.light details.sub{background:none;border:0}
+body.light details summary h3{color:#fff}
+body.light details summary:hover h3{color:#9A9A9A}
+body.light details summary small{color:#bdbdbd}
+body.light details summary::after{color:#fff}
+body.light details .chips li{border-color:#fff}
+body.light details .chips li:hover{background:#fff;color:#111}
+.shots{align-items:start}
+body.light details .shots figure{border-color:#fff;background:#111}
+body.light details .shots figcaption{color:#ddd}
+body.light details .sub>summary{border-color:#fff}
+body.light details .btn:not(.solid){color:#111;border-color:#fff}
+</style>
+<script>
+document.addEventListener('click',function(ev){var r=ev.target.closest('tr.tc-row,tr.mrow');if(r)tcToggle(r);});
+document.addEventListener('keydown',function(ev){if((ev.key==='Enter'||ev.key===' ')&&ev.target.matches&&ev.target.matches('tr.tc-row,tr.mrow')){ev.preventDefault();tcToggle(ev.target);}});
+function tcToggle(r){var d=r.nextElementSibling,o=r.getAttribute('aria-expanded')==='true';r.setAttribute('aria-expanded',!o);d.hidden=o;r.querySelector('.tog').textContent=o?'+':'\u2212';}
+</script>
+<style>
+/* Menu navigasi: bar hitam di atas, menu aktif digaris bawah (tanpa kotak) */
+.nav{background:#0B0B0B;border-bottom:3px solid #9A9A9A}
+.nav ul{justify-content:center;gap:clamp(.25rem,3vw,2.2rem)}
+.nav a{padding:1rem 1.1rem;color:#fff;font-size:.95rem;letter-spacing:.1em;background:none;transition:color .2s}
+.nav a:hover{background:none;color:#9A9A9A;text-decoration:none}
+.nav a[aria-current="page"]{background:none;color:#fff;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:9px}
+@media (max-width:760px){.nav ul{justify-content:flex-start}}
+</style>
+</head>
+<body class="light">
+<nav class="nav" aria-label="Navigasi utama">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tentang.html">Tentang saya</a></li>
+    <li><a href="proyek.html" aria-current="page">Proyek</a></li>
+    <li><a href="pengalaman.html">Pengalaman</a></li>
+    <li><a href="kontak.html">Kontak</a></li>
+  </ul>
+</nav>
+<main>
+  <div class="content">
+    <h1 class="title">Proyek</h1>
+    <h2 class="kat"><span>01</span>Proyek Sistem</h2>
+    <details>
+      <summary><div><h3>Sistem Informasi Pengolahan Nilai</h3><small>Skripsi, 2025–2026 · studi kasus SMK Jakarta Pusat 1</small></div></summary>
+      <div class="body">
+        <ul>
+          <li>Menganalisis kebutuhan tiga peran (admin, guru, siswa) dan merancang sistem rapor berbasis website yang menggantikan pengolahan nilai manual lewat spreadsheet Excel.</li>
+          <li>Merancang skema relasional (ERD) untuk riwayat kelas siswa lintas tahun ajaran, sehingga dashboard, rekap nilai, dan rapor memakai data yang konsisten.</li>
+          <li>Membangun modul input presensi dengan filter tahun ajaran dan kelas yang dinamis.</li>
+          <li>Menulis dokumentasi teknis dan artikel jurnal ilmiah (JRAMI) dari hasil penelitian.</li>
+        </ul>
+        <ul class="chips"><li>PHP native</li><li>MySQL</li><li>Chart.js</li><li>Agile</li></ul>
+        <div class="actions">
+          <details class="sub">
+            <summary>Lihat tampilan sistem</summary>
+            <div class="shots">
+              <figure><a href="img/nilai-1.png" target="_blank" rel="noopener"><img src="img/nilai-1.png" alt="Tampilan Sistem Informasi Pengolahan Nilai 1" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/nilai-2.png" target="_blank" rel="noopener"><img src="img/nilai-2.png" alt="Tampilan Sistem Informasi Pengolahan Nilai 2" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/nilai-3.png" target="_blank" rel="noopener"><img src="img/nilai-3.png" alt="Tampilan Sistem Informasi Pengolahan Nilai 3" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/nilai-4.png" target="_blank" rel="noopener"><img src="img/nilai-4.png" alt="Tampilan Sistem Informasi Pengolahan Nilai 4" loading="lazy" onerror="imgFallback(this)"></a></figure>
+            </div>
+          </details>
+          <a class="btn" href="laporan/laporan-pengolahan-nilai.pdf" target="_blank" rel="noopener">Lihat laporan &nearr;</a>
+        </div>
+      </div>
+    </details>
+    <details>
+      <summary><div><h3>Sistem Presensi QR Code</h3><small>Praktik kerja, SMK Al-Amanah · Maret–Juli 2025</small></div></summary>
+      <div class="body">
+        <ul>
+          <li>Merancang presensi berbasis web yang mencatat check-in dan check-out siswa lewat QR Code, lalu mendeteksi keterlambatan secara otomatis.</li>
+          <li>Menggantikan pencatatan manual agar human error berkurang dan laporan presensi tersedia cepat dan real-time.</li>
+          <li>Menguji alur sistem supaya data yang tercatat akurat.</li>
+        </ul>
+        <div class="actions">
+          <details class="sub">
+            <summary>Lihat tampilan sistem</summary>
+            <div class="shots">
+              <figure><a href="img/presensi-1.png" target="_blank" rel="noopener"><img src="img/presensi-1.png" alt="Tampilan Sistem Presensi QR Code 1" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/presensi-2.png" target="_blank" rel="noopener"><img src="img/presensi-2.png" alt="Tampilan Sistem Presensi QR Code 2" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/presensi-3.png" target="_blank" rel="noopener"><img src="img/presensi-3.png" alt="Tampilan Sistem Presensi QR Code 3" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/presensi-4.png" target="_blank" rel="noopener"><img src="img/presensi-4.png" alt="Tampilan Sistem Presensi QR Code 4" loading="lazy" onerror="imgFallback(this)"></a></figure>
+            </div>
+          </details>
+          <a class="btn" href="laporan/laporan-presensi-qr.pdf" target="_blank" rel="noopener">Lihat laporan &nearr;</a>
+        </div>
+      </div>
+    </details>
+
+    <h2 class="kat"><span>02</span>Testing</h2>
+    <details>
+      <summary><div><h3>Pengujian Otomatis dengan Selenium</h3><small>Sistem Informasi Pengolahan Nilai · Oktober 2026</small></div></summary>
+      <div class="body">
+        <ul>
+          <li>Menyusun test case Black Box Testing untuk memverifikasi seluruh fungsi sistem multiperan sebelum dipakai pengguna, lalu mengotomatiskannya dengan Selenium WebDriver dan pytest.</li>
+          <li>Menyusun 30 test case di enam area: login dan sesi, hak akses antar peran, input nilai oleh guru, pencarian data oleh admin, fitur sisi siswa, dan pembukaan seluruh menu tiap peran.</li>
+          <li>Menguji skenario keamanan, yaitu percobaan SQL injection pada form login, akses halaman tanpa login, dan akses lintas peran, serta validasi nilai di sisi server dengan melewati batas input di browser.</li>
+          <li>Seluruh 30 test case lulus (100%), didokumentasikan lengkap beserta saran pengembangan.</li>
+        </ul>
+        <ul class="chips"><li>Selenium</li><li>pytest</li><li>Python</li><li>Black Box Testing</li></ul>
+        <p class="tc-hint">Klik salah satu modul untuk melihat daftar skenarionya, lalu klik skenario untuk melihat langkah, hasil, dan bukti screenshot-nya.</p>
+<div class="tc-wrap"><table class="tc tc-sum"><thead><tr><th>Modul</th><th>Test case</th><th class="c">Jumlah</th><th class="c">Lulus</th><th class="c">Gagal</th><th class="c"> </th></tr></thead><tbody>
+<tr class="mrow" tabindex="0" role="button" aria-expanded="false"><td>Login dan sesi</td><td>TC01 - TC10</td><td class="c">10</td><td class="c">10</td><td class="c">0</td><td class="c tog">+</td></tr>
+<tr class="mdetail" hidden><td colspan="6"><div class="tc-wrap"><table class="tc tc-main"><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th class="c"> </th></tr></thead><tbody>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC01</td><td>Menampilkan halaman login</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Membuka halaman login aplikasi</td><td>Kolom username, kolom password, dan tombol login tampil</td><td>Ketiga elemen tampil</td><td class="bk"><a href="img/tc01.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc01.png" alt="Bukti TC01" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC02</td><td>Login admin dengan data valid</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Mengisi username dan password admin yang valid, lalu klik tombol login</td><td>Masuk ke dashboard admin (/admin/index.php)</td><td>Berhasil masuk ke dashboard admin</td><td class="bk"><a href="img/tc02.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc02.png" alt="Bukti TC02" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC03</td><td>Login kepala sekolah dengan data valid</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Mengisi NIP dan password kepala sekolah yang valid, lalu klik tombol login</td><td>Masuk ke dashboard kepala sekolah (/kepsek/index.php)</td><td>Berhasil masuk ke dashboard kepala sekolah</td><td class="bk"><a href="img/tc03.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc03.png" alt="Bukti TC03" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC04</td><td>Login guru dengan data valid</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Mengisi NIP dan password guru yang valid, lalu klik tombol login</td><td>Masuk ke dashboard guru (/guru/index.php)</td><td>Berhasil masuk ke dashboard guru</td><td class="bk"><a href="img/tc04.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc04.png" alt="Bukti TC04" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC05</td><td>Login siswa dengan data valid</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Mengisi NISN dan password siswa yang valid, lalu klik tombol login</td><td>Masuk ke dashboard siswa (/siswa/index.php)</td><td>Berhasil masuk ke dashboard siswa</td><td class="bk"><a href="img/tc05.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc05.png" alt="Bukti TC05" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC06</td><td>Login dengan password salah</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Mengisi username admin yang valid dengan password yang salah</td><td>Login ditolak dan tampil pesan kegagalan</td><td>Login ditolak dan pesan kegagalan tampil</td><td class="bk"><a href="img/tc06.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc06.png" alt="Bukti TC06" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC07</td><td>Login dengan username tidak terdaftar</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Mengisi username yang tidak ada di database dan password sembarang</td><td>Login ditolak dan tampil pesan kegagalan</td><td>Login ditolak dan pesan kegagalan tampil</td><td class="bk"><a href="img/tc07.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc07.png" alt="Bukti TC07" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC08</td><td>Percobaan SQL injection pada form login</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Mengisi username dan password dengan &#x27; OR &#x27;1&#x27;=&#x27;1</td><td>Login ditolak dan tidak ada akses ke halaman admin</td><td>Login ditolak, pengguna tetap di halaman login dengan pesan kegagalan</td><td class="bk"><a href="img/tc08.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc08.png" alt="Bukti TC08" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC09</td><td>Mengakses halaman tanpa login</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Membuka /admin/index.php tanpa sesi login</td><td>Dialihkan ke halaman login dengan pesan login terlebih dahulu</td><td>Dialihkan ke halaman login dengan pesan yang sesuai</td><td class="bk"><a href="img/tc09.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc09.png" alt="Bukti TC09" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC10</td><td>Logout</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai admin, membuka logout.php, lalu membuka kembali /admin/index.php</td><td>Sesi berakhir, pesan logout tampil, halaman admin tertutup kembali</td><td>Sesi berakhir, pesan logout tampil, halaman admin kembali meminta login</td><td class="bk"><a href="img/tc10.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc10.png" alt="Bukti TC10" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="hasil"><td colspan="4"><a href="img/testing-1.png" target="_blank" rel="noopener"><img class="thumb wide" src="img/testing-1.png" alt="Hasil pytest 1" loading="lazy" onerror="tcFallback(this)"></a><small>Hasil pytest modul Login dan sesi</small></td></tr>
+</tbody></table></div></td></tr>
+<tr class="mrow" tabindex="0" role="button" aria-expanded="false"><td>Hak akses antar peran</td><td>TC11 - TC16</td><td class="c">6</td><td class="c">6</td><td class="c">0</td><td class="c tog">+</td></tr>
+<tr class="mdetail" hidden><td colspan="6"><div class="tc-wrap"><table class="tc tc-main"><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th class="c"> </th></tr></thead><tbody>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC11</td><td>Siswa mengakses halaman admin</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai siswa, lalu membuka /admin/index.php</td><td>Akses ditolak dan dialihkan ke halaman login</td><td>Akses ditolak dan dialihkan ke halaman login</td><td class="bk"><a href="img/tc11.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc11.png" alt="Bukti TC11" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC12</td><td>Siswa mengakses halaman guru</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai siswa, lalu membuka /guru/index.php</td><td>Akses ditolak dan dialihkan ke halaman login</td><td>Akses ditolak dan dialihkan ke halaman login</td><td class="bk"><a href="img/tc12.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc12.png" alt="Bukti TC12" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC13</td><td>Guru mengakses halaman admin</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai guru, lalu membuka /admin/index.php</td><td>Akses ditolak dan dialihkan ke halaman login</td><td>Akses ditolak dan dialihkan ke halaman login</td><td class="bk"><a href="img/tc13.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc13.png" alt="Bukti TC13" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC14</td><td>Guru mengakses halaman kepala sekolah</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai guru, lalu membuka /kepsek/index.php</td><td>Akses ditolak dan dialihkan ke halaman login</td><td>Akses ditolak dan dialihkan ke halaman login</td><td class="bk"><a href="img/tc14.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc14.png" alt="Bukti TC14" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC15</td><td>Kepala sekolah mengakses halaman admin</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai kepala sekolah, lalu membuka /admin/index.php</td><td>Akses ditolak dan dialihkan ke halaman login</td><td>Akses ditolak dan dialihkan ke halaman login</td><td class="bk"><a href="img/tc15.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc15.png" alt="Bukti TC15" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC16</td><td>Siswa mengakses menu data siswa milik admin</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai siswa, lalu membuka /admin/index.php?page=data_siswa</td><td>Akses ditolak dan dialihkan ke halaman login</td><td>Akses ditolak dan dialihkan ke halaman login</td><td class="bk"><a href="img/tc16.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc16.png" alt="Bukti TC16" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="hasil"><td colspan="4"><a href="img/testing-2.png" target="_blank" rel="noopener"><img class="thumb wide" src="img/testing-2.png" alt="Hasil pytest 2" loading="lazy" onerror="tcFallback(this)"></a><small>Hasil pytest modul Hak akses antar peran</small></td></tr>
+</tbody></table></div></td></tr>
+<tr class="mrow" tabindex="0" role="button" aria-expanded="false"><td>Input nilai oleh guru</td><td>TC17 - TC18</td><td class="c">2</td><td class="c">2</td><td class="c">0</td><td class="c tog">+</td></tr>
+<tr class="mdetail" hidden><td colspan="6"><div class="tc-wrap"><table class="tc tc-main"><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th class="c"> </th></tr></thead><tbody>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC17</td><td>Guru menginput nilai TP</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai guru, memilih mapel dan kelas, mengisi satu kolom TP dengan 85, lalu klik simpan</td><td>Tampil pesan berhasil simpan dan nilai 85 tetap tampil setelah halaman dimuat ulang</td><td>Nilai tersimpan dan terbaca kembali; nilai dikembalikan ke semula setelah pengujian</td><td class="bk"><a href="img/tc17.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc17.png" alt="Bukti TC17" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC18</td><td>Input nilai lebih dari 100</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Dengan batas input di browser dilewati, mengisi kolom TP dengan 150, lalu klik simpan</td><td>Server menolak dengan peringatan nilai tidak wajar dan nilai di database tidak berubah</td><td>Peringatan tampil dan nilai di database tidak berubah</td><td class="bk"><a href="img/tc18.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc18.png" alt="Bukti TC18" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="hasil"><td colspan="4"><a href="img/testing-3.png" target="_blank" rel="noopener"><img class="thumb wide" src="img/testing-3.png" alt="Hasil pytest 3" loading="lazy" onerror="tcFallback(this)"></a><small>Hasil pytest modul Input nilai oleh guru</small></td></tr>
+</tbody></table></div></td></tr>
+<tr class="mrow" tabindex="0" role="button" aria-expanded="false"><td>Pencarian data oleh admin</td><td>TC19 - TC23</td><td class="c">5</td><td class="c">5</td><td class="c">0</td><td class="c tog">+</td></tr>
+<tr class="mdetail" hidden><td colspan="6"><div class="tc-wrap"><table class="tc tc-main"><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th class="c"> </th></tr></thead><tbody>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC19</td><td>Admin mencari siswa berdasarkan nama</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai admin, membuka menu Data Siswa, mengetik &quot;evan&quot; di kotak pencarian, lalu menekan Enter</td><td>Hanya siswa dengan nama yang mengandung kata pencarian yang tampil</td><td>Seluruh hasil mengandung kata &quot;evan&quot;</td><td class="bk"><a href="img/tc19.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc19.png" alt="Bukti TC19" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC20</td><td>Admin mencari siswa berdasarkan NISN</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Pada menu Data Siswa, mengetik NISN siswa di kotak pencarian, lalu menekan Enter</td><td>Siswa dengan NISN tersebut tampil</td><td>Siswa dengan NISN tersebut tampil</td><td class="bk"><a href="img/tc20.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc20.png" alt="Bukti TC20" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC21</td><td>Pencarian siswa yang tidak terdaftar</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Pada menu Data Siswa, mengetik kata yang tidak ada di database</td><td>Tampil pesan data siswa tidak ditemukan</td><td>Pesan data kosong tampil</td><td class="bk"><a href="img/tc21.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc21.png" alt="Bukti TC21" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC22</td><td>Admin mencari guru berdasarkan nama</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Membuka menu Data Guru, mengetik &quot;windah&quot; di kotak pencarian, lalu menekan Enter</td><td>Hanya guru dengan nama yang mengandung kata pencarian yang tampil</td><td>Seluruh hasil mengandung kata &quot;windah&quot;</td><td class="bk"><a href="img/tc22.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc22.png" alt="Bukti TC22" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC23</td><td>Pencarian guru yang tidak terdaftar</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Pada menu Data Guru, mengetik kata yang tidak ada di database</td><td>Tampil pesan data guru tidak ditemukan</td><td>Pesan data kosong tampil</td><td class="bk"><a href="img/tc23.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc23.png" alt="Bukti TC23" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="hasil"><td colspan="4"><a href="img/testing-4.png" target="_blank" rel="noopener"><img class="thumb wide" src="img/testing-4.png" alt="Hasil pytest 4" loading="lazy" onerror="tcFallback(this)"></a><small>Hasil pytest modul Pencarian data oleh admin</small></td></tr>
+</tbody></table></div></td></tr>
+<tr class="mrow" tabindex="0" role="button" aria-expanded="false"><td>Fitur sisi siswa</td><td>TC24 - TC26</td><td class="c">3</td><td class="c">3</td><td class="c">0</td><td class="c tog">+</td></tr>
+<tr class="mdetail" hidden><td colspan="6"><div class="tc-wrap"><table class="tc tc-main"><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th class="c"> </th></tr></thead><tbody>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC24</td><td>Siswa membuka menu Lihat Nilai</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai siswa, lalu membuka menu Lihat Nilai</td><td>Tabel nilai tampil dengan kolom Mata Pelajaran, Nilai Akhir, dan Predikat, serta memuat minimal satu mata pelajaran</td><td>Tabel dan kolom tampil, data mata pelajaran tersedia</td><td class="bk"><a href="img/tc24.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc24.png" alt="Bukti TC24" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC25</td><td>Siswa membuka halaman Profil</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai siswa, lalu membuka menu Profil</td><td>Data siswa yang sedang login (nama lengkap) tampil</td><td>Nama siswa tampil sesuai akun yang login</td><td class="bk"><a href="img/tc25.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc25.png" alt="Bukti TC25" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC26</td><td>Siswa berpindah tahun ajaran pada Lihat Nilai</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Membuka Lihat Nilai pada setiap pilihan tahun ajaran</td><td>Halaman tampil tanpa pesan error PHP</td><td>Tidak ada error PHP pada seluruh tahun ajaran</td><td class="bk"><a href="img/tc26.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc26.png" alt="Bukti TC26" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="hasil"><td colspan="4"><a href="img/testing-5.png" target="_blank" rel="noopener"><img class="thumb wide" src="img/testing-5.png" alt="Hasil pytest 5" loading="lazy" onerror="tcFallback(this)"></a><small>Hasil pytest modul Fitur sisi siswa</small></td></tr>
+</tbody></table></div></td></tr>
+<tr class="mrow" tabindex="0" role="button" aria-expanded="false"><td>Pembukaan seluruh menu tiap peran</td><td>TC27 - TC30</td><td class="c">4</td><td class="c">4</td><td class="c">0</td><td class="c tog">+</td></tr>
+<tr class="mdetail" hidden><td colspan="6"><div class="tc-wrap"><table class="tc tc-main"><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th class="c"> </th></tr></thead><tbody>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC27</td><td>Admin membuka seluruh menu</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai admin, lalu membuka 12 menu pada sidebar satu per satu</td><td>Seluruh menu tampil tanpa error PHP dan tanpa pesan halaman tidak ditemukan</td><td>Seluruh 12 menu admin tampil tanpa error</td><td class="bk"><a href="img/tc27.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc27.png" alt="Bukti TC27" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC28</td><td>Guru membuka seluruh menu</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai guru, lalu membuka 9 menu pada sidebar satu per satu</td><td>Seluruh menu tampil tanpa error PHP dan tanpa pesan halaman tidak ditemukan</td><td>Seluruh 9 menu guru tampil tanpa error</td><td class="bk"><a href="img/tc28.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc28.png" alt="Bukti TC28" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC29</td><td>Kepala sekolah membuka seluruh menu</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai kepala sekolah, lalu membuka 5 menu pada sidebar satu per satu</td><td>Seluruh menu tampil tanpa error PHP dan tanpa pesan halaman tidak ditemukan</td><td>Seluruh 5 menu kepala sekolah tampil tanpa error</td><td class="bk"><a href="img/tc29.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc29.png" alt="Bukti TC29" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="tc-row" tabindex="0" role="button" aria-expanded="false"><td class="id">TC30</td><td>Siswa membuka seluruh menu</td><td class="ok">&#10003; Lulus</td><td class="c tog">+</td></tr>
+<tr class="tc-detail" hidden><td colspan="4"><table class="tc tc-in"><thead><tr><th>Langkah / Input</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Bukti</th></tr></thead><tbody><tr><td>Login sebagai siswa, lalu membuka 4 menu pada sidebar satu per satu</td><td>Seluruh menu tampil tanpa error PHP dan tanpa pesan halaman tidak ditemukan</td><td>Seluruh 4 menu siswa tampil tanpa error</td><td class="bk"><a href="img/tc30.png" target="_blank" rel="noopener"><img class="thumb" src="img/tc30.png" alt="Bukti TC30" loading="lazy" onerror="tcFallback(this)"></a></td></tr></tbody></table></td></tr>
+<tr class="hasil"><td colspan="4"><a href="img/testing-6.png" target="_blank" rel="noopener"><img class="thumb wide" src="img/testing-6.png" alt="Hasil pytest 6" loading="lazy" onerror="tcFallback(this)"></a><small>Hasil pytest modul Pembukaan seluruh menu tiap peran</small></td></tr>
+</tbody></table></div></td></tr>
+</tbody><tfoot><tr><td>Total</td><td>TC01 - TC30</td><td class="c">30</td><td class="c">30</td><td class="c">0</td><td></td></tr></tfoot></table></div>
+        <div class="actions">
+          <a class="btn" href="laporan/Dokumentasi_Pengujian_Selenium_rapor_jp1.docx" target="_blank" rel="noopener">Lihat laporan &nearr;</a>
+        </div>
+      </div>
+    </details>
+
+    <h2 class="kat"><span>03</span>Desain UI</h2>
+    <details>
+      <summary><div><h3>Mockup Antarmuka Sistem Pengolahan Nilai</h3><small>Skripsi, 2025–2026</small></div></summary>
+      <div class="body">
+        <ul>
+          <li>Membuat mockup antarmuka sistem sebelum tahap pembangunan.</li>
+        </ul>
+        <ul class="chips"><li>UI mockup</li></ul>
+        <div class="actions">
+          <details class="sub">
+            <summary>Lihat mockup</summary>
+            <div class="shots">
+              <figure><a href="img/ui-1.png" target="_blank" rel="noopener"><img src="img/ui-1.png" alt="Mockup antarmuka 1" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/ui-2.png" target="_blank" rel="noopener"><img src="img/ui-2.png" alt="Mockup antarmuka 2" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/ui-3.png" target="_blank" rel="noopener"><img src="img/ui-3.png" alt="Mockup antarmuka 3" loading="lazy" onerror="imgFallback(this)"></a></figure>
+              <figure><a href="img/ui-4.png" target="_blank" rel="noopener"><img src="img/ui-4.png" alt="Mockup antarmuka 4" loading="lazy" onerror="imgFallback(this)"></a></figure>
+            </div>
+          </details>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary><div><h3>Desain UI Website Jual Beli Akun Mobile Legends</h3><small>Tugas kuliah (kelompok) · November 2024</small></div></summary>
+      <div class="body">
+        <ul>
+          <li>Merancang antarmuka website jual beli akun Mobile Legends sebagai bagian dari proposal proyek berbasis metode Agile (proyek konsep untuk tugas kuliah, dikerjakan bertiga).</li>
+          <li>Mendesain enam layar utama: login, sign in, dashboard, pencarian akun, penjualan akun, dan deskripsi akun.</li>
+        </ul>
+        <ul class="chips"><li>UI/UX</li><li>Agile</li></ul>
+        <div class="actions">
+          <details class="sub">
+            <summary>Lihat desain</summary>
+            <div class="shots">
+              <figure><a href="img/ml-1.png" target="_blank" rel="noopener"><img src="img/ml-1.png" alt="Desain UI Login" loading="lazy" onerror="imgFallback(this)"></a><figcaption>Login</figcaption></figure>
+              <figure><a href="img/ml-2.png" target="_blank" rel="noopener"><img src="img/ml-2.png" alt="Desain UI Sign in (belum punya akun)" loading="lazy" onerror="imgFallback(this)"></a><figcaption>Sign in (belum punya akun)</figcaption></figure>
+              <figure><a href="img/ml-3.png" target="_blank" rel="noopener"><img src="img/ml-3.png" alt="Desain UI Dashboard" loading="lazy" onerror="imgFallback(this)"></a><figcaption>Dashboard</figcaption></figure>
+              <figure><a href="img/ml-4.png" target="_blank" rel="noopener"><img src="img/ml-4.png" alt="Desain UI Pencarian akun" loading="lazy" onerror="imgFallback(this)"></a><figcaption>Pencarian akun</figcaption></figure>
+              <figure><a href="img/ml-5.png" target="_blank" rel="noopener"><img src="img/ml-5.png" alt="Desain UI Penjualan akun" loading="lazy" onerror="imgFallback(this)"></a><figcaption>Penjualan akun</figcaption></figure>
+              <figure><a href="img/ml-6.png" target="_blank" rel="noopener"><img src="img/ml-6.png" alt="Desain UI Deskripsi akun" loading="lazy" onerror="imgFallback(this)"></a><figcaption>Deskripsi akun</figcaption></figure>
+            </div>
+          </details>
+        </div>
+      </div>
+    </details>
+
+    <h2 class="kat"><span>04</span>Evaluasi Kualitas Web Komnas HAM</h2>
+    <details>
+      <summary><div><h3>Penilaian dengan Metode SAW</h3><small>Magang, Sekretariat Jenderal Komnas HAM · Juli 2025</small></div></summary>
+      <div class="body">
+        <ul>
+          <li>Menilai kualitas website dengan metode Simple Additive Weighting (SAW), dari penyusunan kriteria sampai hasil yang terdokumentasi.</li>
+          <li>Membantu pemantauan server dan melaporkan masalah pada infrastruktur IT.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</main>
+</body>
+</html>

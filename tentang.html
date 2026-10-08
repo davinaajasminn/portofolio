@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tentang saya | Davina Jasmin Azzahra</title>
+<meta name="description" content="Portofolio Davina Jasmin Azzahra, lulusan Sistem Informasi dengan pengalaman perancangan sistem, pengembangan web, dan pengujian perangkat lunak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* Menu navigasi: bar hitam di atas, menu aktif digaris bawah (tanpa kotak) */
+.nav{background:#0B0B0B;border-bottom:3px solid #9A9A9A}
+.nav ul{justify-content:center;gap:clamp(.25rem,3vw,2.2rem)}
+.nav a{padding:1rem 1.1rem;color:#fff;font-size:.95rem;letter-spacing:.1em;background:none;transition:color .2s}
+.nav a:hover{background:none;color:#9A9A9A;text-decoration:none}
+.nav a[aria-current="page"]{background:none;color:#fff;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:9px}
+@media (max-width:760px){.nav ul{justify-content:flex-start}}
+</style>
+</head>
+<body class="light">
+<nav class="nav" aria-label="Navigasi utama">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tentang.html" aria-current="page">Tentang saya</a></li>
+    <li><a href="proyek.html">Proyek</a></li>
+    <li><a href="pengalaman.html">Pengalaman</a></li>
+    <li><a href="kontak.html">Kontak</a></li>
+  </ul>
+</nav>
+<main>
+  <div class="content">
+    <h1 class="title">Halo, saya Davina</h1>
+    <div class="about">
+      <div class="frame"><span>DJ</span><img src="foto.jpg" alt="Foto Davina" onerror="this.remove()"></div>
+      <div>
+        <p>Lulusan S1 Sistem Informasi Universitas Pamulang (IPK 3,79) dengan pengalaman di seluruh tahap pengembangan sistem: analisis kebutuhan, pemodelan UML dan ERD, mockup antarmuka, pengembangan web dengan PHP (native dan Laravel) serta MySQL, dan pengujian otomatis dengan Selenium. Membangun sistem informasi pengolahan nilai berbasis website untuk SMK sebagai skripsi, dan merancang sistem presensi QR Code saat praktik kerja.</p>
+        <p>Telah menjalani magang di Sekretariat Jenderal Komnas HAM, menilai kualitas website dengan metode SAW dan membantu pemantauan server. Pemegang Sertifikat Kompetensi Programmer dari BNSP. Terbiasa menyusun dokumentasi teknis yang jelas dan bekerja dengan metode Agile. Saat ini mencari posisi di tim TI, seperti pengembangan web, analisis sistem, atau pengujian perangkat lunak, untuk mengubah kebutuhan pengguna menjadi sistem yang andal dan terdokumentasi dengan baik.</p>
+        <div class="facts">
+          <div>
+            <b>IPK 3,79</b>
+            <small>S1 Sistem Informasi, 2022–2026</small>
+            <a class="lihat" href="https://drive.google.com/file/d/1b4SsAg8cx8XVFTZHPKX7wb3NO9gfqaN4/view?usp=drive_link" target="_blank" rel="noopener">Lihat transkrip nilai &nearr;</a>
+          </div>
+        </div>
+        <ul class="chips" aria-label="Keahlian">
+          <li>Analisis kebutuhan</li><li>UML</li><li>ERD</li><li>UI mockup</li><li>Dokumentasi teknis</li><li>Agile</li><li>PHP</li><li>Python</li><li>Laravel</li><li>MySQL</li><li>Black Box Testing</li><li>Selenium</li><li>Microsoft Office</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
