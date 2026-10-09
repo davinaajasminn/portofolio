@@ -140,3 +140,61 @@
     fr.addEventListener('pointerleave',function(){fr.style.transform=''});
   }
 })();
+
+/* ---- foto pop-up (lightbox) ---- */
+(function(){
+  var d=document,btns=[].slice.call(d.querySelectorAll('.foto-btn[data-fotos]'));
+  if(!btns.length)return;
+  var lb=d.createElement('div');lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','Galeri foto');
+  lb.innerHTML='<div class="lb-top"><div><div class="lb-title"></div><div class="lb-count"></div></div><button class="lb-x" type="button" aria-label="Tutup">✕</button></div>'+
+    '<div class="lb-stage"><button class="lb-nav lb-prev" type="button" aria-label="Foto sebelumnya">←</button><img alt=""><button class="lb-nav lb-next" type="button" aria-label="Foto berikutnya">→</button></div><div class="lb-cap"></div>';
+  d.body.appendChild(lb);
+  var img=lb.querySelector('img'),ttl=lb.querySelector('.lb-title'),cnt=lb.querySelector('.lb-count'),cap=lb.querySelector('.lb-cap'),prev=lb.querySelector('.lb-prev'),next=lb.querySelector('.lb-next'),x=lb.querySelector('.lb-x');
+  var list=[],i=0,opener=null;
+  function show(n,dir){
+    i=(n+list.length)%list.length;
+    img.classList.remove('ready','slide-l','slide-r');
+    img.onload=function(){img.classList.add('ready');if(dir)img.classList.add(dir>0?'slide-l':'slide-r')};
+    img.src=list[i];img.alt=ttl.textContent+' foto '+(i+1);
+    cnt.textContent=(i+1)+' / '+list.length;
+    prev.hidden=next.hidden=list.length<2;
+  }
+  function open(b){
+    list=b.fotos;opener=b;ttl.textContent=b.judul;cap.textContent=b.judul;
+    show(0);lb.classList.add('open');d.body.classList.add('lb-lock');x.focus();
+  }
+  function close(){lb.classList.remove('open');d.body.classList.remove('lb-lock');if(opener)opener.focus()}
+  x.addEventListener('click',close);
+  prev.addEventListener('click',function(){show(i-1,-1)});
+  next.addEventListener('click',function(){show(i+1,1)});
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.classList.contains('lb-stage')||e.target===cap)close()});
+  d.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    else if(e.key==='ArrowLeft'&&list.length>1)show(i-1,-1);
+    else if(e.key==='ArrowRight'&&list.length>1)show(i+1,1);
+    else if(e.key==='Tab'){var f=[x,prev,next].filter(function(el){return !el.hidden});var k=f.indexOf(d.activeElement);e.preventDefault();f[(k+(e.shiftKey?-1:1)+f.length)%f.length].focus()}
+  });
+  var sx=null;
+  lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){
+    if(sx===null||list.length<2)return;var dx=e.changedTouches[0].clientX-sx;sx=null;
+    if(Math.abs(dx)>50)show(i+(dx<0?1:-1),dx<0?1:-1);
+  },{passive:true});
+  /* tombol hanya muncul bila fotonya benar-benar ada */
+  btns.forEach(function(b){
+    var urls=b.getAttribute('data-fotos').split(',').map(function(s){return s.trim()}).filter(Boolean);
+    var ok=[],left=urls.length;
+    urls.forEach(function(u,k){
+      var t=new Image();
+      t.onload=function(){ok[k]=u;done()};t.onerror=done;t.src=u;
+    });
+    function done(){
+      if(--left)return;
+      b.fotos=ok.filter(Boolean);
+      var li=b.closest('li'),h=li&&li.querySelector('h3');
+      b.judul=h?h.textContent:'Foto';
+      if(b.fotos.length){b.hidden=false;b.addEventListener('click',function(){open(b)})}
+    }
+  });
+})();

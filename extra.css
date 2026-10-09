@@ -145,3 +145,30 @@ details[open]>summary::after{transform:rotate(180deg)}
 @media (min-width:761px){
   .roles{align-self:flex-start;text-align:left;max-width:300px;min-height:3.4em;margin:1rem 0 0;line-height:1.5}
 }
+
+/* ===== FOTO POP-UP (halaman Pengalaman) ===== */
+.foto-btn{margin-top:.8rem;display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;font:600 .85rem var(--body);letter-spacing:.06em;text-transform:uppercase;border:2px solid #0B0B0B;background:#fff;color:#0B0B0B;cursor:pointer;transition:transform .25s var(--ease),background .2s,color .2s,box-shadow .25s;-webkit-tap-highlight-color:transparent}
+.foto-btn[hidden]{display:none}
+.foto-btn::before{content:"";width:1.05em;height:.85em;border:2px solid currentColor;border-radius:2px;background:linear-gradient(135deg,transparent 55%,currentColor 56%) no-repeat 0 100%/60% 55%}
+.foto-btn:hover{background:#0B0B0B;color:#fff;transform:translateY(-2px);box-shadow:4px 4px 0 rgba(0,0,0,.25)}
+.foto-btn:active{transform:scale(.96)}
+.lb{position:fixed;inset:0;z-index:100;display:grid;grid-template-rows:auto 1fr auto;background:rgba(11,11,11,.94);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s;touch-action:pan-y}
+.lb.open{opacity:1;visibility:visible;transition:opacity .3s}
+.lb-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 1rem;color:#fff}
+.lb-title{font:400 1.3rem/1.1 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.lb-count{font-size:.9rem;color:#bdbdbd;font-weight:600}
+.lb-x,.lb-nav{border:2px solid #fff;background:none;color:#fff;cursor:pointer;font:400 1.4rem/1 var(--display);width:44px;height:44px;flex:none;transition:background .2s,color .2s,transform .25s var(--ease);-webkit-tap-highlight-color:transparent}
+.lb-x:hover,.lb-nav:hover{background:#fff;color:#0B0B0B}
+.lb-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding:0 .5rem}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border:2px solid #fff;background:#fff;transform:scale(.94);opacity:0;transition:transform .45s var(--ease),opacity .3s}
+.lb.open .lb-stage img.ready{transform:none;opacity:1}
+.lb-stage img.slide-l{animation:lbL .4s var(--ease)}
+.lb-stage img.slide-r{animation:lbR .4s var(--ease)}
+@keyframes lbL{from{opacity:0;transform:translateX(50px)}}
+@keyframes lbR{from{opacity:0;transform:translateX(-50px)}}
+.lb-nav{position:absolute;top:50%;margin-top:-22px;background:rgba(11,11,11,.6)}
+.lb-prev{left:.8rem}.lb-next{right:.8rem}
+.lb-nav[hidden]{display:none}
+.lb-cap{padding:.8rem 1rem 1.1rem;text-align:center;color:#ddd;font-size:.95rem;min-height:2.6rem}
+@media (max-width:760px){.lb-nav{width:40px;height:40px;margin-top:-20px}.lb-prev{left:.4rem}.lb-next{right:.4rem}}
+body.lb-lock{overflow:hidden}
