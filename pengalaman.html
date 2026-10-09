@@ -2,26 +2,23 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pengalaman | Davina Jasmin Azzahra</title>
 <meta name="description" content="Portofolio Davina Jasmin Azzahra, lulusan Sistem Informasi dengan pengalaman perancangan sistem, pengembangan web, dan pengujian perangkat lunak.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-/* Menu navigasi: bar hitam di atas, menu aktif digaris bawah (tanpa kotak) */
-.nav{background:#0B0B0B;border-bottom:3px solid #9A9A9A}
-.nav ul{justify-content:center;gap:clamp(.25rem,3vw,2.2rem)}
-.nav a{padding:1rem 1.1rem;color:#fff;font-size:.95rem;letter-spacing:.1em;background:none;transition:color .2s}
-.nav a:hover{background:none;color:#9A9A9A;text-decoration:none}
-.nav a[aria-current="page"]{background:none;color:#fff;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:9px}
-@media (max-width:760px){.nav ul{justify-content:flex-start}}
-</style>
+<link rel="stylesheet" href="extra.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body class="dark">
 <nav class="nav" aria-label="Navigasi utama">
-  <ul>
+  <div class="nav-bar">
+    <a class="brand" href="index.html" aria-label="Beranda">DJA</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Buka menu"><span></span><span></span><span></span></button>
+  </div>
+  <ul id="menu">
     <li><a href="index.html">Home</a></li>
     <li><a href="tentang.html">Tentang saya</a></li>
     <li><a href="proyek.html">Proyek</a></li>
@@ -44,5 +41,6 @@
     </ul>
   </div>
 </main>
+<script src="app.js" defer></script>
 </body>
 </html>
